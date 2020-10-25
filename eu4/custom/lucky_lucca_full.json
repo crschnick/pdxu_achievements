@@ -1,0 +1,95 @@
+{
+  "achievement": {
+    "name": "Lucky Lucca",
+    "description": "As Lucca, own Lucknow!",
+    "uuid": "db341422-144a-11eb-adc1-0242ac120002",
+    "icon": "icon.png",
+    "variables": {
+    },
+    "types": [
+      {
+        "name": "Normal",
+        "conditions": [
+          "normal_difficulty"
+        ]
+      }
+    ],
+    "eligibilityConditions": [
+      {
+        "description": "Ironman",
+        "node": "meta",
+        "filter": "${condition.ironman}"
+      },
+      {
+        "description": "Normal province values",
+        "node": "gamestate",
+        "filter": "${condition.normal_province_values}"
+      },
+      {
+        "description": "Historical lucky nations",
+        "node": "gamestate",
+        "filter": "${condition.historical_lucky_nations}"
+      },
+      {
+        "description": "Started at 1444.11.11",
+        "node": "gamestate",
+        "filter": "${condition.normal_start_date}"
+      },
+      {
+        "description": "No custom nations",
+        "node": "countries",
+        "filter": "${condition.no_custom_nation}"
+      },
+      {
+        "description": "Started as Lucca",
+        "node": "countries_history",
+        "filter": "$.${player}.tag_history.length() == 0 || $.KOJ.tag_history[0].changed_tag_from == 'LUC'"
+      }
+    ],
+    "achievementConditions": [
+      {
+        "description": "Not playing as a released vassal",
+        "node": "countries",
+        "filter": "[?($.${player}.has_switched_nation != true)]"
+      },
+      {
+        "description": "Is Lucca",
+        "node": "meta",
+        "filter": "[?($.player == 'LUC')]"
+      },
+      {
+        "description": "Owns and has core on Lucknow",
+        "node": "provinces",
+        "filter": "[?($[?(@.province_id == 523)].owner == 'LUC' && 'LUC' in $[?(@.province_id == 523)].cores)]"
+      }
+    ],
+    "score": [
+      {
+        "type": "divide",
+        "name": "Years since start date",
+        "scorers": [
+          "years_since_start",
+          {
+            "type": "subtract",
+            "scorers": [
+              {
+                "type": "pathValue",
+                "node": "meta",
+                "path": "$.date.days_since_beginning"
+              },
+              {
+                "type": "pathValue",
+                "node": "gamestate",
+                "path": "$.start_date.days_since_beginning"
+              }
+            ]
+          },
+          {
+            "type": "value",
+            "value": 365
+          }
+        ]
+      }
+    ]
+  }
+}
