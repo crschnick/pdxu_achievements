@@ -1,16 +1,24 @@
 # Pdx-Unlimiter Achievements
 
-This repository contains the official achievements for the [Pdx-Unlimiter]() and a reference for creating custom achievements.
+This repository contains the official achievements for the [Pdx-Unlimiter](https://github.com/crschnick/pdx_unlimiter) and a reference for creating custom achievements.
 
 ## Creating Achievements
 
-Pdx-Unlimiter achievements are specified in the [JSON format]() and make heavy use of [Json-Paths]().
-It is therefore useful to have a good understanding of JSON.
-Custom achievements can be created in the `<pdxu_dir>/achievements/<game>/custom/` directory.
-To test your own Json-Path expressions, you can use the [Jayway JsonPath Evaluator](http://jsonpath.herokuapp.com/).
+Pdx-Unlimiter achievements are specified in the [JSON format](https://en.wikipedia.org/wiki/JSON) and make heavy use of [Json-Paths](https://github.com/json-path/JsonPath).
+It is therefore useful to have a good understanding of both.
 
-If you believe that the Pdx-Unlimiter has an achievement related bug, please report it on the [Pdx-Unlimiter repository]()
-For anything else you can use the [issues page]() of this repository.
+The Json-Paths expressions are applied to the contents of Pdx-Unlimiter save game data files, which are saved as `data.zip`.
+These save game data files are zip files that contain many json files, which are called nodes.
+To get an overview over the node contents, it is encouraged to browse the Pdx-Unlimiter save game data files.
+You can also take a look at all [official achievements](https://github.com/crschnick/pdxu_achievements/tree/master/eu4/official) to get a better understanding of pdxu achievements.
+
+Custom achievements can be created in the `<pdxu_install_directory>/achievements/<game>/custom/` directory.
+To test your own Json-Path expressions, you can use the [Jayway JsonPath Evaluator](http://jsonpath.herokuapp.com/) with the option `Always return result list` enabled.
+
+The code that parses these achievement files can be found [here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/)
+If you believe that the Pdx-Unlimiter has an achievement related bug,
+please report it on the [Pdx-Unlimiter repository](https://github.com/crschnick/pdx_unlimiter)
+For anything else you can use the [issues page](https://github.com/crschnick/pdxu_achievements/issues) of this repository.
 
 ## Pdxu Achievement Reference
 
@@ -73,7 +81,7 @@ The third type are path count variables, which store the size of a Json-Path eva
       }
 
 The return value of a variable evaluation can be referenced in other achievement definitions by using `%{variableName}` in the text.
-There are also several predefined variables and the full list can be found at [online generator](https://uuid-generator.com/).
+There are also several predefined variables and the full list can be found [here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/AchievementContent.java).
 For example, the variable property could look like this:
 
     "variables": {
@@ -135,7 +143,7 @@ However for more complex conditions, that cannot be completely replaced by varia
 
 
 There also exists several predefined conditions, which can be referenced with a text value.
-The full list of predefined conditions can be found at []().
+The full list of predefined conditions can be found [here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/AchievementContent.java).
 
 
 
