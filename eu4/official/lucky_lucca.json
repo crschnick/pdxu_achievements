@@ -3,8 +3,20 @@
     "name": "Lucky Lucca",
     "description": "As Lucca, own Lucknow!",
     "uuid": "db341422-144a-11eb-adc1-0242ac120002",
-    "icon": "icon.png",
+    "icon": "%{eu4.achievementImageDir}/achievement_lucky_lucca.dds",
     "variables": {
+      "lucknowCores": {
+        "type": "pathValue",
+        "node": "provinces",
+        "path": "$[?(@.province_id == 523)]['cores'][*]",
+        "list": true
+      },
+      "lucknowOwner": {
+        "type": "pathValue",
+        "node": "provinces",
+        "path": "$[?(@.province_id == 523)]['owner']",
+        "list": false
+      }
     },
     "types": [
       {
@@ -19,57 +31,29 @@
       "normal_province_values",
       "historical_lucky_nations",
       "normal_start_date",
+      "limited_country_forming",
       "no_custom_nation",
       {
         "description": "Started as Lucca",
         "node": "countries_history",
-        "filter": "[?($.${player}.tag_history.length() == 0 || $.KOJ.tag_history[0].changed_tag_from == 'LUC')]"
+        "condition": "$[%{player}]['tag_history'].length() == 0 || $[%{player}]['tag_history'][0] == 'HUN'"
       }
     ],
     "achievementConditions": [
-      {
-        "description": "Not playing as a released vassal",
-        "node": "countries",
-        "filter": "[?($.${player}.has_switched_nation != true)]"
-      },
+      "not_released_vassal",
       {
         "description": "Is Lucca",
-        "node": "meta",
-        "filter": "[?($.player == 'LUC')]"
+        "condition": "%{player} == 'LUC'"
       },
       {
-        "description": "Owns and has core on Lucknow",
-        "node": "provinces",
-        "filter": "[?($[?(@.province_id == 523)].owner == 'LUC' && 'LUC' in $[?(@.province_id == 523)].cores)]"
+        "description": "Owns Lucknow",
+        "condition": "%{lucknowOwner} == 'LUC'"
+      },
+      {
+        "description": "Has core on Lucknow",
+        "condition": "'LUC' in %{lucknowCores}"
       }
     ],
-    "score": [
-      {
-        "type": "divide",
-        "name": "Years since start date",
-        "scorers": [
-          "years_since_start",
-          {
-            "type": "subtract",
-            "scorers": [
-              {
-                "type": "pathValue",
-                "node": "meta",
-                "path": "$.date.days_since_beginning"
-              },
-              {
-                "type": "pathValue",
-                "node": "gamestate",
-                "path": "$.start_date.days_since_beginning"
-              }
-            ]
-          },
-          {
-            "type": "value",
-            "value": 365
-          }
-        ]
-      }
-    ]
+    "score": "years_since_start"
   }
 }
