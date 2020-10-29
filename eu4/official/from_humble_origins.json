@@ -1,0 +1,64 @@
+{
+  "achievement": {
+    "name": "From Humble Origins",
+    "description": "Starting as a custom nation with no more than 50 points, have at least 2000 total development.",
+    "uuid": "1b6056ff-ef20-46ec-a1db-ab0387d8d92c",
+    "icon": "%{eu4.achievementImageDir}/achievement_from_humble_origins.dds",
+    "variables": {
+      "development": {
+        "type": "pathValue",
+        "node": "countries",
+        "path": "$[%{player}]['development']",
+        "list": false
+      }
+    },
+    "types": [
+      {
+        "name": "Normal",
+        "conditions": [
+          "normal_difficulty"
+        ]
+      },
+      {
+        "name": "Hard",
+        "conditions": [
+          "hard_difficulty"
+        ]
+      },
+      {
+        "name": "Very hard",
+        "conditions": [
+          "very_hard_difficulty"
+        ]
+      }
+    ],
+    "eligibilityConditions": [
+      "ironman",
+      "normal_province_values",
+      "historical_lucky_nations",
+      "normal_start_date",
+      "limited_country_forming",
+      {
+        "description": "Is playing as a custom nation",
+        "node": "countries",
+        "condition": "$[%{player}]['is_custom'] == true"
+      },
+      {
+        "description": "Exactly one custom nation exists in the world",
+        "condition": "%{custom_nation_count} == 1"
+      },
+      {
+        "description": "Used no more than 51 nation designer points",
+        "condition": "$[%{player}]['custom_nation_points'] <= 51"
+      }
+    ],
+    "achievementConditions": [
+      "not_released_vassal",
+      {
+        "description": "Has at least 2000 total development",
+        "condition": "%{development} >= 2000"
+      }
+    ],
+    "score": "years_since_start"
+  }
+}

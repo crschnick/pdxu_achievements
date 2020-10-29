@@ -1,0 +1,72 @@
+{
+  "achievement": {
+    "name": "Gold Rush",
+    "description": "Reform the Golden Horde before 1500.",
+    "uuid": "50e6a198-1a05-11eb-adc1-0242ac120002",
+    "icon": "%{eu4.achievementImageDir}/achievement_gold_rush.dds",
+    "variables": {
+      "reforms": {
+        "type": "pathValue",
+        "node": "countries",
+        "path": "$[%{player}]['government']['reform_stack']['history'][*]",
+        "list": true
+      },
+      "culture": {
+        "type": "pathValue",
+        "node": "countries",
+        "path": "$[%{player}]['primary_culture']",
+        "list": false
+      }
+    },
+    "types": [
+      {
+        "name": "Normal",
+        "conditions": [
+          "normal_difficulty"
+        ]
+      },
+      {
+        "name": "Hard",
+        "conditions": [
+          "hard_difficulty"
+        ]
+      },
+      {
+        "name": "Very hard",
+        "conditions": [
+          "very_hard_difficulty"
+        ]
+      }
+    ],
+    "eligibilityConditions": [
+      "ironman",
+      "normal_province_values",
+      "historical_lucky_nations",
+      "normal_start_date",
+      "limited_country_forming",
+      "no_custom_nation",
+      {
+        "description": "Government type is Steppe Nomads",
+        "condition": "'steppe_horde' in %{reforms}"
+      },
+      {
+        "description": "Culture group is Tatar",
+        "node": "eu4.cultures",
+        "condition": "$['tartar'][%{culture}].length() >= 0"
+      }
+    ],
+    "achievementConditions": [
+      "not_released_vassal",
+      {
+        "description": "Is Golden Horde",
+        "condition": "%{player} == 'GLH'"
+      },
+      {
+        "description": "The year is before 1500",
+        "node": "meta",
+        "condition": "$.date.year < 1500"
+      }
+    ],
+    "score": "years_since_start"
+  }
+}

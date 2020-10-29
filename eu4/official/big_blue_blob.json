@@ -1,0 +1,71 @@
+{
+  "achievement": {
+    "name": "Big Blue Blob",
+    "description": "As France, hold 100 European core provinces before 1500.",
+    "uuid": "9c500398-9014-459b-b538-0c47e0e602c6",
+    "icon": "%{eu4.achievementImageDir}/achievement_big_blue_blob.dds",
+    "variables": {
+      "europeanProvinces": {
+        "type": "pathValue",
+        "node": "eu4.continent",
+        "path": "$.europe[*]",
+        "list": true
+      },
+      "provinceCount": {
+        "type": "pathCount",
+        "node": "provinces",
+        "path": "$[?('FRA' in @['cores'][*] && @.province_id in %{europeanProvinces})]"
+      }
+    },
+    "types": [
+      {
+        "name": "Normal",
+        "conditions": [
+          "normal_difficulty"
+        ]
+      },
+      {
+        "name": "Hard",
+        "conditions": [
+          "hard_difficulty"
+        ]
+      },
+      {
+        "name": "Very hard",
+        "conditions": [
+          "very_hard_difficulty"
+        ]
+      }
+    ],
+    "eligibilityConditions": [
+      "ironman",
+      "normal_province_values",
+      "historical_lucky_nations",
+      "normal_start_date",
+      "limited_country_forming",
+      "no_custom_nation",
+      {
+        "description": "Started as France",
+        "node": "countries_history",
+        "condition": "($[%{player}]['tag_history'].length() == 0 && %{player} == 'FRA') || $[%{player}]['tag_history'][0] == 'FRA'"
+      }
+    ],
+    "achievementConditions": [
+      "not_released_vassal",
+      {
+        "description": "Is France",
+        "condition": "%{player} == 'FRA'"
+      },
+      {
+        "description": "The year is before 1500",
+        "node": "meta",
+        "condition": "$.date.year < 1500"
+      },
+      {
+        "description": "Has 100 core provinces in Europe",
+        "condition": "%{provinceCount} >= 100"
+      }
+    ],
+    "score": "years_since_start"
+  }
+}

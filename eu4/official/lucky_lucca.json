@@ -24,6 +24,18 @@
         "conditions": [
           "normal_difficulty"
         ]
+      },
+      {
+        "name": "Hard",
+        "conditions": [
+          "hard_difficulty"
+        ]
+      },
+      {
+        "name": "Very hard",
+        "conditions": [
+          "very_hard_difficulty"
+        ]
       }
     ],
     "eligibilityConditions": [
@@ -36,7 +48,7 @@
       {
         "description": "Started as Lucca",
         "node": "countries_history",
-        "condition": "$[%{player}]['tag_history'].length() == 0 || $[%{player}]['tag_history'][0] == 'HUN'"
+        "condition": "($[%{player}]['tag_history'].length() == 0 && %{player} == 'LUC') || $[%{player}]['tag_history'][0] == 'LUC'"
       }
     ],
     "achievementConditions": [
