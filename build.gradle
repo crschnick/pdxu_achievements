@@ -1,0 +1,31 @@
+setVersion '1.0-rc2'
+
+task clean(type: DefaultTask) {
+    doLast {
+        getBuildDir().deleteDir()
+    }
+}
+
+task copyAchievements(type: Copy) {
+    into "${buildDir}/out/eu4"
+    from "${projectDir}/eu4"
+}
+
+task writeVersion(type: DefaultTask) {
+    doLast {
+        mkdir "${buildDir}/out/"
+        file("${buildDir}/out/version").write(String.valueOf(version))
+    }
+}
+
+task build(type: DefaultTask)
+build.dependsOn(copyAchievements)
+build.dependsOn(writeVersion)
+
+task createDist(type: Zip, dependsOn: [build, writeVersion]) {
+    destinationDirectory = getBuildDir()
+    archiveBaseName = project.getName()
+    archiveAppendix = project.getVersion()
+    from "${buildDir}/out"
+}
+
