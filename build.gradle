@@ -1,4 +1,4 @@
-setVersion '1.0-rc2'
+setVersion '1.0-rc3'
 
 task clean(type: DefaultTask) {
     doLast {
