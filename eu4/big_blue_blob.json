@@ -44,6 +44,12 @@
       "normal_start_date",
       "limited_country_forming",
       "no_custom_nation",
+      "not_released_vassal",
+      {
+        "description": "The year is before 1500",
+        "node": "meta",
+        "condition": "$.date.year < 1500"
+      },
       {
         "description": "Started as France",
         "node": "countries_history",
@@ -51,15 +57,9 @@
       }
     ],
     "achievementConditions": [
-      "not_released_vassal",
       {
         "description": "Is France",
         "condition": "%{player} == 'FRA'"
-      },
-      {
-        "description": "The year is before 1500",
-        "node": "meta",
-        "condition": "$.date.year < 1500"
       },
       {
         "description": "Has 100 core provinces in Europe",

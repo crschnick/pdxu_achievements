@@ -1,0 +1,71 @@
+{
+  "achievement": {
+    "name": "Rise of the White Sheep",
+    "description": "As Aq Qoyunlu, own Tabriz and have Qara Qoyunlu not exist by 1478.",
+    "uuid": "858212a2-1b5e-11eb-adc1-0242ac120002",
+    "icon": "%{eu4.achievementImageDir}/achievement_rise_of_the_white_sheep.dds",
+    "variables": {
+      "qqOwnedProvinces": {
+        "type": "pathCount",
+        "node": "provinces",
+        "path": "$[?('QAR' in @['cores'][*] && @.owner == %{player})]"
+      }
+    },
+    "types": [
+      {
+        "name": "Normal",
+        "conditions": [
+          "normal_difficulty"
+        ]
+      },
+      {
+        "name": "Hard",
+        "conditions": [
+          "hard_difficulty"
+        ]
+      },
+      {
+        "name": "Very hard",
+        "conditions": [
+          "very_hard_difficulty"
+        ]
+      }
+    ],
+    "eligibilityConditions": [
+      "ironman",
+      "normal_province_values",
+      "historical_lucky_nations",
+      "normal_start_date",
+      "limited_country_forming",
+      "no_custom_nation",
+      "not_released_vassal",
+      {
+        "description": "Started as Aq Qoyunlu",
+        "node": "countries_history",
+        "condition": "($[%{player}]['tag_history'].length() == 0 && %{player} == 'AKK')"
+      },
+      {
+        "description": "The year is before 1478",
+        "node": "meta",
+        "condition": "$.date.year < 1478"
+      }
+    ],
+    "achievementConditions": [
+      {
+        "description": "Is Aq Qoyunlu",
+        "condition": "%{player} == 'AKK'"
+      },
+      {
+        "description": "Qara Qoyunlu does not exist",
+        "node": "countries",
+        "condition": "$['QAR']['realm_development'] == 0.0"
+      }
+    ],
+    "score": {
+      "type": "pathCount",
+      "node": "provinces",
+      "path": "$[?('QAR' in @['cores'][*] && @.owner == %{player})]",
+      "name": "Owned provinces that are Qara Qoyunlu cores"
+    }
+  }
+}

@@ -1,21 +1,20 @@
 # Pdx-Unlimiter Achievements
 
-This repository contains the official achievements for the [Pdx-Unlimiter](https://github.com/crschnick/pdx_unlimiter) and a reference for creating custom achievements.
+This repository contains the official achievements for the [Pdx-Unlimiter](https://github.com/crschnick/pdx_unlimiter)
+and a reference for creating custom achievements.
 
 ## Creating Achievements
 
-Pdx-Unlimiter achievements are specified in the [JSON format](https://en.wikipedia.org/wiki/JSON) and make heavy use of [Json-Paths](https://github.com/json-path/JsonPath).
+Pdx-Unlimiter achievements are specified in the [JSON format](https://en.wikipedia.org/wiki/JSON) and make heavy use
+of [Json-Paths](https://github.com/json-path/JsonPath).
 It is therefore useful to have a good understanding of both.
 
-The Json-Paths expressions are applied to the contents of Pdx-Unlimiter save game data files, which are saved as `data.zip`.
-These save game data files are zip files that contain many json files, which are called nodes.
-To get an overview over the node contents, it is encouraged to browse the Pdx-Unlimiter save game data files.
-You can also take a look at all [official achievements](https://github.com/crschnick/pdxu_achievements/tree/master/eu4/official) to get a better understanding of pdxu achievements.
+Custom achievements can be created in the `<pdxu_install_directory>/user_achievements/<game>/` directory.
+To test your own Json-Path expressions, you can use the [Jayway JsonPath Evaluator](http://jsonpath.herokuapp.com/)
+with the option `Always return result list` enabled.
 
-Custom achievements can be created in the `<pdxu_install_directory>/achievements/<game>/custom/` directory.
-To test your own Json-Path expressions, you can use the [Jayway JsonPath Evaluator](http://jsonpath.herokuapp.com/) with the option `Always return result list` enabled.
-
-The code that parses these achievement files can be found [here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/)
+The code that parses these achievement files can be found
+[here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/)
 If you believe that the Pdx-Unlimiter has an achievement related bug,
 please report it on the [Pdx-Unlimiter repository](https://github.com/crschnick/pdx_unlimiter)
 For anything else you can use the [issues page](https://github.com/crschnick/pdxu_achievements/issues) of this repository.
@@ -43,12 +42,31 @@ The next property is the uuid of the achievement:
 This property is used to identify the achievement even if the name and description changes.
 To generate this ID you can use an [online generator](https://uuid-generator.com/).
 
+### Nodes
+
+A node, in the context of pdxu achievements, are the contents of game data files or savegame files
+on which Json-Path expressions can be applied on. (They don't have to be in the json format)
+
+The savegame nodes are the contents of Pdx-Unlimiter save game data files, which are saved as `data.zip`.
+To get an overview over the node structure of savegames, it is encouraged to browse the Pdx-Unlimiter save game data files.
+You can also take a look at all [official achievements](https://github.com/crschnick/pdxu_achievements/tree/master/eu4/)
+to get a better understanding of the pdxu achievement structure.
+
+The game data nodes are the contents of selected game data files:
+- `eu4.area`, the contents of `<EU4 install dir>/map/area.txt`
+- `eu4.region`, the contents of `<EU4 install dir>/map/region.txt`
+- `eu4.superregion`, the contents of `<EU4 install dir>/map/superregion.txt`
+- `eu4.continent`, the contents of `<EU4 install dir>/map/continent.txt`
+- `eu4.cultures`, the contents of `<EU4 install dir>/common/cultures/00_cultures.txt`
+
 ### Variables
 
+Variables are defined with the following property:
+
     "variables": {
-      <varriableName>: <variable>
+      <variableName>: <variable>
       ...
-      <varriableName>: <variable>
+      <variableName>: <variable>
     },
 
 There are three types of variables.
@@ -81,7 +99,8 @@ The third type are path count variables, which store the size of a Json-Path eva
       }
 
 The return value of a variable evaluation can be referenced in other achievement definitions by using `%{variableName}` in the text.
-There are also several predefined variables and the full list can be found [here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/AchievementContent.java).
+There are also several predefined variables and the full list can be found
+[here](https://github.com/crschnick/pdx_unlimiter/blob/master/app/src/main/java/com/crschnick/pdx_unlimiter/app/achievement/AchievementContent.java).
 For example, the variable property could look like this:
 
     "variables": {

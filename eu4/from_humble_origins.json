@@ -38,6 +38,7 @@
       "historical_lucky_nations",
       "normal_start_date",
       "limited_country_forming",
+      "not_released_vassal",
       {
         "description": "Is playing as a custom nation",
         "node": "countries",
@@ -53,7 +54,6 @@
       }
     ],
     "achievementConditions": [
-      "not_released_vassal",
       {
         "description": "Has at least 2000 total development",
         "condition": "%{development} >= 2000"

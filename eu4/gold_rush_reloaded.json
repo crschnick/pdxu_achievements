@@ -45,6 +45,7 @@
       "normal_start_date",
       "limited_country_forming",
       "no_custom_nation",
+      "not_released_vassal",
       {
         "description": "Government type is Steppe Nomads",
         "condition": "'steppe_horde' in %{reforms}"
@@ -54,7 +55,6 @@
         "node": "eu4.cultures",
         "condition": "$['tartar'][%{culture}].length() >= 0"
       },
-      "not_released_vassal",
       {
         "description": "The year is before 1500",
         "node": "meta",

@@ -45,6 +45,12 @@
       "normal_start_date",
       "limited_country_forming",
       "no_custom_nation",
+      "not_released_vassal",
+      {
+        "description": "The year is before 1500",
+        "node": "meta",
+        "condition": "$.date.year < 1500"
+      },
       {
         "description": "Government type is Steppe Nomads",
         "condition": "'steppe_horde' in %{reforms}"
@@ -56,15 +62,9 @@
       }
     ],
     "achievementConditions": [
-      "not_released_vassal",
       {
         "description": "Is Golden Horde",
         "condition": "%{player} == 'GLH'"
-      },
-      {
-        "description": "The year is before 1500",
-        "node": "meta",
-        "condition": "$.date.year < 1500"
       }
     ],
     "score": "years_since_start"

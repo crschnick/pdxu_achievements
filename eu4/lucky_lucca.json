@@ -45,6 +45,7 @@
       "normal_start_date",
       "limited_country_forming",
       "no_custom_nation",
+      "not_released_vassal",
       {
         "description": "Started as Lucca",
         "node": "countries_history",
@@ -52,7 +53,6 @@
       }
     ],
     "achievementConditions": [
-      "not_released_vassal",
       {
         "description": "Is Lucca",
         "condition": "%{player} == 'LUC'"
