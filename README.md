@@ -19,6 +19,11 @@ If you believe that the Pdx-Unlimiter has an achievement related bug,
 please report it on the [Pdx-Unlimiter repository](https://github.com/crschnick/pdx_unlimiter)
 For anything else you can use the [issues page](https://github.com/crschnick/pdxu_achievements/issues) of this repository.
 
+## Building
+
+You can build the project with `gradle clean build`.
+To create a release distribution, use `gradle createDist`.
+
 ## Pdxu Achievement Reference
 
 An achievement file has to contain the following definition:
