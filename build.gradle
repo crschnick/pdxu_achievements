@@ -1,4 +1,4 @@
-setVersion '1.0-rc3'
+setVersion '1.0-rc4'
 
 task clean(type: DefaultTask) {
     doLast {
@@ -25,7 +25,6 @@ build.dependsOn(writeVersion)
 task createDist(type: Zip, dependsOn: [build, writeVersion]) {
     destinationDirectory = getBuildDir()
     archiveBaseName = project.getName()
-    archiveAppendix = project.getVersion()
     from "${buildDir}/out"
 }
 
